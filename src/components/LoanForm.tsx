@@ -66,7 +66,7 @@ export function LoanForm({ initial, onSubmit, onCancel }: Props) {
 
   const field = (name: string, label: string, children: React.ReactNode) => (
     <div>
-      <label className="block text-sm font-medium text-slate-700 mb-1">{label}</label>
+      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{label}</label>
       {children}
       {errors[name] && <p className="text-red-600 text-xs mt-1">{errors[name]}</p>}
     </div>
@@ -79,7 +79,7 @@ export function LoanForm({ initial, onSubmit, onCancel }: Props) {
           "loanName",
           "Loan Name",
           <input
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+            className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 dark:text-slate-100 px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
             value={loanName}
             onChange={(e) => setLoanName(e.target.value)}
             placeholder="e.g. Home Loan"
@@ -92,7 +92,7 @@ export function LoanForm({ initial, onSubmit, onCancel }: Props) {
             type="number"
             min="1"
             step="1"
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm tabular-nums focus:ring-2 focus:ring-brand-500 outline-none"
+            className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 dark:text-slate-100 px-3 py-2 text-sm tabular-nums focus:ring-2 focus:ring-brand-500 outline-none"
             value={principalAmount}
             onChange={(e) => setPrincipalAmount(e.target.value)}
           />
@@ -105,7 +105,7 @@ export function LoanForm({ initial, onSubmit, onCancel }: Props) {
             min="0"
             max="100"
             step="any"
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm tabular-nums focus:ring-2 focus:ring-brand-500 outline-none"
+            className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 dark:text-slate-100 px-3 py-2 text-sm tabular-nums focus:ring-2 focus:ring-brand-500 outline-none"
             value={annualInterestRate}
             onChange={(e) => setAnnualInterestRate(e.target.value)}
           />
@@ -115,7 +115,7 @@ export function LoanForm({ initial, onSubmit, onCancel }: Props) {
           "Loan Start Date",
           <input
             type="date"
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none"
+            className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 dark:text-slate-100 px-3 py-2 text-sm focus:ring-2 focus:ring-brand-500 outline-none"
             value={loanStartDate}
             onChange={(e) => setLoanStartDate(e.target.value)}
           />
@@ -128,7 +128,7 @@ export function LoanForm({ initial, onSubmit, onCancel }: Props) {
             min="1"
             max="600"
             step="1"
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm tabular-nums focus:ring-2 focus:ring-brand-500 outline-none"
+            className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 dark:text-slate-100 px-3 py-2 text-sm tabular-nums focus:ring-2 focus:ring-brand-500 outline-none"
             value={tenureMonths}
             onChange={(e) => setTenureMonths(e.target.value)}
           />
@@ -136,21 +136,21 @@ export function LoanForm({ initial, onSubmit, onCancel }: Props) {
       </div>
 
       {preview && (
-        <div className="rounded-xl bg-brand-50 border border-brand-100 p-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+        <div className="rounded-xl bg-brand-50 dark:bg-brand-900/30 border border-brand-100 dark:border-brand-800 p-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
           <div>
-            <p className="text-slate-600">Monthly EMI</p>
-            <p className="text-xl font-bold text-brand-900 tabular-nums">
+            <p className="text-slate-600 dark:text-slate-400">Monthly EMI</p>
+            <p className="text-xl font-bold text-brand-900 dark:text-brand-300 tabular-nums">
               {formatCurrencyExact(preview.emiAmount)}
             </p>
           </div>
           <div>
-            <p className="text-slate-600">Total Interest</p>
+            <p className="text-slate-600 dark:text-slate-400">Total Interest</p>
             <p className="text-lg font-semibold tabular-nums">
               {formatCurrencyExact(preview.totalInterest)}
             </p>
           </div>
           <div>
-            <p className="text-slate-600">Total Payable</p>
+            <p className="text-slate-600 dark:text-slate-400">Total Payable</p>
             <p className="text-lg font-semibold tabular-nums">
               {formatCurrencyExact(preview.totalPayable)}
             </p>
@@ -168,7 +168,7 @@ export function LoanForm({ initial, onSubmit, onCancel }: Props) {
         <button
           type="button"
           onClick={onCancel}
-          className="px-5 py-2.5 rounded-lg border border-slate-300 text-slate-700 text-sm hover:bg-slate-50"
+          className="px-5 py-2.5 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 text-sm hover:bg-slate-50 dark:hover:bg-slate-700"
         >
           Cancel
         </button>

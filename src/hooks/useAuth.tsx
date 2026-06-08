@@ -13,6 +13,7 @@ import {
   firebaseSignIn,
   firebaseSignOut,
   firebaseSignUp,
+  firebaseResetPassword,
 } from "../utils/firebaseAuth";
 
 interface AuthContextValue {
@@ -21,6 +22,7 @@ interface AuthContextValue {
   login: (email: string, password: string) => Promise<string | null>;
   register: (name: string, email: string, password: string) => Promise<string | null>;
   logout: () => Promise<void>;
+  resetPassword: (email: string) => Promise<string | null>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -64,8 +66,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   }, []);
 
+  const resetPassword = useCallback(async (email: string) => {
+    return await firebaseResetPassword(email);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, isLoading, login, register, logout, resetPassword }}>
       {children}
     </AuthContext.Provider>
   );

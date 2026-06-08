@@ -9,7 +9,7 @@ export function AddLoanPage() {
   return (
     <div className="space-y-6 max-w-3xl">
       <h1 className="text-2xl font-bold">Add New Loan</h1>
-      <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
         <LoanForm
           onSubmit={async (input) => {
             await addLoan(input);

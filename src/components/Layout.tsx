@@ -8,6 +8,8 @@ import {
   LogOut,
 } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
+import { ThemeToggle } from "./ThemeToggle";
+import { InstallPwaButton } from "./InstallPwaButton";
 
 const nav = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard },
@@ -42,18 +44,22 @@ export function Layout() {
               </p>
             </div>
           </div>
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-brand-100 hover:bg-brand-800 hover:text-white transition-colors shrink-0"
-          >
-            <LogOut className="w-4 h-4" />
-            <span className="hidden sm:inline">Log out</span>
-          </button>
+          <div className="flex items-center gap-1 shrink-0">
+            <InstallPwaButton className="px-3 py-2 rounded-lg text-sm text-brand-100 hover:bg-brand-800 hover:text-white transition-colors" />
+            <ThemeToggle className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-brand-100 hover:bg-brand-800 hover:text-white transition-colors" />
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-brand-100 hover:bg-brand-800 hover:text-white transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+              <span className="hidden sm:inline">Log out</span>
+            </button>
+          </div>
         </div>
       </header>
 
-      <nav className="bg-white border-b border-slate-200 sticky top-0 z-10">
+      <nav className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 flex gap-1 overflow-x-auto">
           {nav.map(({ to, label, icon: Icon }) => (
             <NavLink
@@ -63,8 +69,8 @@ export function Layout() {
               className={({ isActive }) =>
                 `flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                   isActive
-                    ? "border-brand-600 text-brand-700"
-                    : "border-transparent text-slate-600 hover:text-brand-600"
+                    ? "border-brand-600 text-brand-700 dark:text-brand-400"
+                    : "border-transparent text-slate-600 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-400"
                 }`
               }
             >
@@ -79,7 +85,7 @@ export function Layout() {
         <Outlet />
       </main>
 
-      <footer className="border-t border-slate-200 py-4 text-center text-xs text-slate-500">
+      <footer className="border-t border-slate-200 dark:border-slate-700 py-4 text-center text-xs text-slate-500 dark:text-slate-400">
         Personal Loan & EMI Tracker
       </footer>
     </div>

@@ -9,7 +9,7 @@ export function EditLoanPage() {
   const loan = id ? getLoan(id) : undefined;
 
   if (!loan) {
-    return <p className="text-slate-500">Loan not found.</p>;
+    return <p className="text-slate-500 dark:text-slate-400">Loan not found.</p>;
   }
 
   return (
@@ -18,10 +18,10 @@ export function EditLoanPage() {
         ← Back to loan
       </Link>
       <h1 className="text-2xl font-bold">Edit Loan</h1>
-      <p className="text-sm text-amber-800 bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
+      <p className="text-sm text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/30 border border-amber-100 dark:border-amber-800 rounded-lg px-3 py-2">
         Editing recalculates unpaid EMIs. Already paid installments are kept.
       </p>
-      <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
         <LoanForm
           initial={loan}
           onSubmit={async (input) => {

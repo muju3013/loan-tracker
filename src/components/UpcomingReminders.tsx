@@ -12,23 +12,23 @@ export function UpcomingReminders() {
 
   if (upcomingEmis.length === 0) {
     return (
-      <section className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+      <section className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
         <h2 className="font-semibold text-lg mb-2">Upcoming EMIs</h2>
-        <p className="text-slate-500 text-sm">No upcoming payments. Add a loan to get started.</p>
+        <p className="text-slate-500 dark:text-slate-400 text-sm">No upcoming payments. Add a loan to get started.</p>
       </section>
     );
   }
 
   return (
-    <section className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-      <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between gap-2">
+    <section className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+      <div className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <Calendar className="w-5 h-5 text-brand-600" />
           <h2 className="font-semibold text-lg">Upcoming EMIs</h2>
         </div>
-        <span className="text-xs text-slate-500">{monthLabel}</span>
+        <span className="text-xs text-slate-500 dark:text-slate-400">{monthLabel}</span>
       </div>
-      <ul className="divide-y divide-slate-100">
+      <ul className="divide-y divide-slate-100 dark:divide-slate-700">
         {upcomingEmis.map((emi) => {
           const loan = getLoan(emi.loanId);
 
@@ -42,7 +42,7 @@ export function UpcomingReminders() {
                   >
                     {loan?.loanName ?? "Loan"}
                   </Link>
-                  <p className="text-xs text-slate-400 mt-0.5">
+                  <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">
                     Installment #{emi.installmentNumber}
                   </p>
                   <div className="mt-2">
@@ -53,7 +53,7 @@ export function UpcomingReminders() {
                   <p className="text-lg font-bold tabular-nums">
                     {formatCurrencyExact(emi.emiAmount)}
                   </p>
-                  <p className="text-sm text-slate-600 mt-1">
+                  <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
                     Due{" "}
                     <span className="font-medium">
                       {formatDisplayDate(emi.scheduledDueDate)}

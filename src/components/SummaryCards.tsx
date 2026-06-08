@@ -38,7 +38,7 @@ export function SummaryCards({
   return (
     <div className="space-y-4">
       {overdueCount > 0 && (
-        <div className="flex items-center gap-2 px-4 py-3 rounded-lg bg-red-50 border border-red-200 text-red-800 text-sm">
+        <div className="flex items-center gap-2 px-4 py-3 rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-300 text-sm">
           <AlertCircle className="w-5 h-5 shrink-0" />
           <span>
             You have <strong>{overdueCount}</strong> overdue EMI
@@ -51,11 +51,11 @@ export function SummaryCards({
         {cards.map((card) => (
           <div
             key={card.label}
-            className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm"
+            className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-5 shadow-sm"
           >
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-sm text-slate-500">{card.label}</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">{card.label}</p>
                 <p className="text-2xl font-bold tabular-nums mt-1">{card.value}</p>
               </div>
               <div
