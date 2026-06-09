@@ -1,8 +1,18 @@
 import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
 import { useAppStore } from "../hooks/useAppStore";
+import { useAuth } from "../hooks/useAuth";
+import { NotificationService } from "../services/notificationService";
 
 export function DataLoader() {
-  const { dataLoading, syncError } = useAppStore();
+  const { dataLoading, syncError, loans, data } = useAppStore();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (!dataLoading && user && loans.length > 0) {
+      NotificationService.generateReminders(user.id, loans, data.emiSchedule);
+    }
+  }, [dataLoading, user, loans, data.emiSchedule]);
 
   if (dataLoading) {
     return (

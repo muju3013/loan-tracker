@@ -6,10 +6,12 @@ import {
   CalendarDays,
   Wallet,
   LogOut,
+  Bell,
 } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { ThemeToggle } from "./ThemeToggle";
 import { InstallPwaButton } from "./InstallPwaButton";
+import { useNotifications } from "../hooks/useNotifications";
 
 const nav = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard },
@@ -21,6 +23,8 @@ const nav = [
 export function Layout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { unreadCount } = useNotifications();
+
 
   async function handleLogout() {
     await logout();
@@ -46,6 +50,19 @@ export function Layout() {
           </div>
           <div className="flex items-center gap-1 shrink-0">
             <InstallPwaButton className="px-3 py-2 rounded-lg text-sm text-brand-100 hover:bg-brand-800 hover:text-white transition-colors" />
+            
+            <NavLink
+              to="/notifications"
+              className="relative inline-flex items-center justify-center p-2 rounded-lg text-brand-100 hover:bg-brand-800 hover:text-white transition-colors"
+            >
+              <Bell className="w-5 h-5" />
+              {unreadCount > 0 && (
+                <span className="absolute top-1 right-1 flex items-center justify-center w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full animate-pulse">
+                  {unreadCount > 9 ? '9+' : unreadCount}
+                </span>
+              )}
+            </NavLink>
+
             <ThemeToggle className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-brand-100 hover:bg-brand-800 hover:text-white transition-colors" />
             <button
               type="button"

@@ -44,3 +44,17 @@ export interface AppData {
   emiSchedule: EmiInstallment[];
   holidays: Holiday[];
 }
+
+export type NotificationType = "reminder_7d" | "reminder_3d" | "due_today" | "overdue";
+
+export interface AppNotification {
+  id: string;
+  userId: string;
+  title: string;
+  message: string;
+  type: NotificationType;
+  relatedLoanId: string;
+  relatedEmiId: string;
+  isRead: boolean;
+  createdAt: string; // ISO string or timestamp
+}
