@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { Eye, EyeOff, Lock, Mail, User, Wallet } from "lucide-react";
+import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { ThemeToggle } from "../components/ThemeToggle";
+import { AppLogo } from "../components/AppLogo";
 
 type Mode = "login" | "signup" | "forgot";
 
@@ -60,48 +61,54 @@ export function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen flex relative">
+    <div className="min-h-screen flex relative bg-[#0a0f1c] text-slate-200">
       <div className="absolute top-4 right-4 z-10">
-        <ThemeToggle className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 bg-white/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 backdrop-blur-sm transition-colors" />
+        <ThemeToggle className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-slate-300 bg-white/5 border border-white/10 hover:bg-white/10 backdrop-blur-md transition-colors" />
       </div>
-      <div className="hidden lg:flex lg:w-1/2 bg-brand-900 text-white flex-col justify-between p-12">
-        <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-xl bg-brand-500 flex items-center justify-center">
-            <Wallet className="w-6 h-6" />
-          </div>
-          <span className="font-semibold text-xl">Loan & EMI Tracker</span>
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#0a0f1c] to-[#111827] flex-col justify-between p-12 border-r border-white/5 relative overflow-hidden">
+        {/* Decorative background glows */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-brand-500/20 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3" />
+        
+        <div className="flex items-center gap-3 relative z-10">
+          <AppLogo className="w-12 h-12 drop-shadow-[0_0_15px_rgba(16,185,129,0.4)]" />
+          <span className="font-bold text-2xl tracking-wide bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">Loan Tracker</span>
         </div>
-        <div>
-          <h1 className="text-3xl font-bold leading-tight">
+        <div className="relative z-10">
+          <h1 className="text-4xl font-bold leading-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
             Manage your loans
             <br />
             in one place
           </h1>
-          <p className="mt-4 text-brand-100 text-lg max-w-md">
+          <p className="mt-6 text-slate-400 text-lg max-w-md leading-relaxed">
             Track EMIs, due dates, and payments. Your data stays private in this browser.
           </p>
         </div>
-        <p className="text-brand-200 text-sm">Personal finance demo · Secure accounts</p>
+        <p className="text-slate-500 text-sm relative z-10">Personal finance demo · Secure accounts</p>
       </div>
 
-      <div className="flex-1 flex items-center justify-center p-6 bg-slate-50 dark:bg-slate-900">
-        <div className="w-full max-w-md">
-          <div className="lg:hidden flex items-center gap-3 mb-8 justify-center">
-            <div className="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white">
-              <Wallet className="w-5 h-5" />
-            </div>
-            <span className="font-semibold text-lg text-slate-900 dark:text-slate-100">Loan & EMI Tracker</span>
+      <div className="flex-1 flex items-center justify-center p-6 bg-[#0a0f1c] relative overflow-hidden">
+        {/* Mobile background glows */}
+        <div className="lg:hidden absolute top-0 right-0 w-64 h-64 bg-brand-500/10 rounded-full blur-[80px]" />
+        
+        <div className="w-full max-w-md relative z-10">
+          <div className="lg:hidden flex items-center gap-3 mb-10 justify-center">
+            <AppLogo className="w-12 h-12 drop-shadow-[0_0_15px_rgba(16,185,129,0.4)]" />
+            <span className="font-bold text-2xl tracking-wide bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">Loan Tracker</span>
           </div>
 
-          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
-            <div className="flex border-b border-slate-100 dark:border-slate-700">
+          <div className="bg-white/5 backdrop-blur-xl rounded-[24px] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] border border-white/10 overflow-hidden relative">
+            {/* Inner glow line at top */}
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-brand-500/50 to-transparent" />
+            
+            <div className="flex border-b border-white/5">
               <button
                 type="button"
                 onClick={() => switchMode("login")}
-                className={`flex-1 py-3.5 text-sm font-medium transition-colors ${
+                className={`flex-1 py-4 text-sm font-medium transition-all duration-300 ${
                   mode === "login"
-                    ? "text-brand-700 dark:text-brand-400 border-b-2 border-brand-600 bg-brand-50/50 dark:bg-brand-900/30"
-                    : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
+                    ? "text-brand-400 border-b-2 border-brand-500 bg-brand-500/10"
+                    : "text-slate-500 hover:text-slate-300 hover:bg-white/5"
                 }`}
               >
                 Log in
@@ -109,22 +116,22 @@ export function AuthPage() {
               <button
                 type="button"
                 onClick={() => switchMode("signup")}
-                className={`flex-1 py-3.5 text-sm font-medium transition-colors ${
+                className={`flex-1 py-4 text-sm font-medium transition-all duration-300 ${
                   mode === "signup"
-                    ? "text-brand-700 dark:text-brand-400 border-b-2 border-brand-600 bg-brand-50/50 dark:bg-brand-900/30"
-                    : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
+                    ? "text-brand-400 border-b-2 border-brand-500 bg-brand-500/10"
+                    : "text-slate-500 hover:text-slate-300 hover:bg-white/5"
                 }`}
               >
                 Sign up
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-4">
-              <div>
-                <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+            <form onSubmit={handleSubmit} className="p-8 space-y-5">
+              <div className="mb-2">
+                <h2 className="text-2xl font-bold text-white">
                   {mode === "login" ? "Welcome back" : mode === "signup" ? "Create account" : "Reset Password"}
                 </h2>
-                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                <p className="text-sm text-slate-400 mt-1.5">
                   {mode === "login"
                     ? "Enter your email and password"
                     : mode === "signup"
@@ -134,31 +141,31 @@ export function AuthPage() {
               </div>
 
               {error && (
-                <div className="text-sm text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/30 border border-red-100 dark:border-red-800 rounded-lg px-3 py-2">
+                <div className="text-sm text-red-400 bg-red-950/50 border border-red-900/50 rounded-xl px-4 py-3 backdrop-blur-md">
                   {error}
                 </div>
               )}
 
               {success && (
-                <div className="text-sm text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-900/30 border border-green-100 dark:border-green-800 rounded-lg px-3 py-2">
+                <div className="text-sm text-green-400 bg-green-950/50 border border-green-900/50 rounded-xl px-4 py-3 backdrop-blur-md">
                   {success}
                 </div>
               )}
 
               {mode === "signup" && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-sm font-medium text-slate-300 mb-1.5">
                     Full name
                   </label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <div className="relative group">
+                    <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-brand-400 transition-colors" />
                     <input
                       type="text"
                       autoComplete="name"
                       required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full pl-10 pr-3 py-2.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-white/10 bg-black/20 text-white text-sm focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50 outline-none transition-all placeholder:text-slate-600"
                       placeholder="Your name"
                     />
                   </div>
@@ -166,16 +173,16 @@ export function AuthPage() {
               )}
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Email</label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <label className="block text-sm font-medium text-slate-300 mb-1.5">Email</label>
+                <div className="relative group">
+                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-brand-400 transition-colors" />
                   <input
                     type="email"
                     autoComplete="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-10 pr-3 py-2.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-white/10 bg-black/20 text-white text-sm focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50 outline-none transition-all placeholder:text-slate-600"
                     placeholder="you@example.com"
                   />
                 </div>
@@ -183,20 +190,20 @@ export function AuthPage() {
 
               {mode !== "forgot" && (
                 <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Password</label>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="block text-sm font-medium text-slate-300">Password</label>
                     {mode === "login" && (
                       <button
-                        type="button"
+                         type="button"
                         onClick={() => switchMode("forgot")}
-                        className="text-xs font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300"
+                        className="text-xs font-medium text-brand-400 hover:text-brand-300 transition-colors"
                       >
                         Forgot password?
                       </button>
                     )}
                   </div>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <div className="relative group">
+                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-brand-400 transition-colors" />
                     <input
                       type={showPassword ? "text" : "password"}
                       autoComplete={mode === "login" ? "current-password" : "new-password"}
@@ -204,13 +211,13 @@ export function AuthPage() {
                       minLength={6}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full pl-10 pr-10 py-2.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+                      className="w-full pl-10 pr-12 py-3 rounded-xl border border-white/10 bg-black/20 text-white text-sm focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50 outline-none transition-all placeholder:text-slate-600"
                       placeholder="••••••••"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword((v) => !v)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors"
                       aria-label={showPassword ? "Hide password" : "Show password"}
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -221,11 +228,11 @@ export function AuthPage() {
 
               {mode === "signup" && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-sm font-medium text-slate-300 mb-1.5">
                     Confirm password
                   </label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <div className="relative group">
+                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-brand-400 transition-colors" />
                     <input
                       type={showPassword ? "text" : "password"}
                       autoComplete="new-password"
@@ -233,7 +240,7 @@ export function AuthPage() {
                       minLength={6}
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="w-full pl-10 pr-3 py-2.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+                      className="w-full pl-10 pr-12 py-3 rounded-xl border border-white/10 bg-black/20 text-white text-sm focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50 outline-none transition-all placeholder:text-slate-600"
                       placeholder="••••••••"
                     />
                   </div>
@@ -243,7 +250,7 @@ export function AuthPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-2.5 rounded-lg bg-brand-600 text-white font-medium text-sm hover:bg-brand-700 disabled:opacity-60 transition-colors"
+                className="w-full py-3 mt-4 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-white font-semibold text-sm shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 scale-100 active:scale-[0.98]"
               >
                 {submitting
                   ? "Please wait…"
@@ -258,7 +265,7 @@ export function AuthPage() {
                 <button
                   type="button"
                   onClick={() => switchMode("login")}
-                  className="w-full py-2.5 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-medium text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                  className="w-full py-3 rounded-xl border border-white/10 bg-white/5 text-slate-300 font-medium text-sm hover:bg-white/10 transition-colors"
                 >
                   Back to login
                 </button>
@@ -266,8 +273,8 @@ export function AuthPage() {
             </form>
           </div>
 
-          <p className="text-center text-xs text-slate-500 dark:text-slate-400 mt-6">
-            Secured with Firebase Authentication & Firestore.
+          <p className="text-center text-sm text-slate-500 mt-8 font-medium">
+            Made with <span className="text-red-500">❤️</span> 1330
           </p>
         </div>
       </div>

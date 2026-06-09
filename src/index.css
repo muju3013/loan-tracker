@@ -3,20 +3,44 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
   --color-brand-50: #eff6ff;
   --color-brand-100: #dbeafe;
-  --color-brand-500: #3b82f6;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #3b82f6; /* Neon blue base */
   --color-brand-600: #2563eb;
   --color-brand-700: #1d4ed8;
-  --color-brand-900: #1e3a5f;
+  --color-brand-800: #1e40af;
+  --color-brand-900: #0a0f1c; /* Dark Navy Background */
+  --color-brand-950: #050810;
+  
+  --color-purple-accent: #a855f7;
+  --color-green-accent: #10b981;
 }
 
 body {
   font-family: var(--font-sans);
-  @apply bg-slate-50 text-slate-900 antialiased dark:bg-slate-900 dark:text-slate-100;
+  @apply bg-[#0a0f1c] text-slate-200 antialiased selection:bg-brand-500/30 selection:text-white;
 }
 
 .tabular-nums {
   font-variant-numeric: tabular-nums;
+}
+
+/* Glassmorphism utility classes */
+.glass-card {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-[20px] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+}
+
+.glow-border {
+  @apply relative;
+}
+.glow-border::before {
+  content: '';
+  @apply absolute -inset-[1px] bg-gradient-to-r from-brand-500 to-purple-accent rounded-[20px] -z-10 opacity-30 blur-sm transition-opacity duration-300;
+}
+.glow-border:hover::before {
+  @apply opacity-60;
 }
