@@ -11,6 +11,7 @@ import { LoanDetailPage } from "./pages/LoanDetailPage";
 import { EditLoanPage } from "./pages/EditLoanPage";
 import { HolidaysPage } from "./pages/HolidaysPage";
 import { NotificationsPage } from "./pages/NotificationsPage";
+import { ProfilePage } from "./pages/ProfilePage";
 import { DataLoader } from "./components/DataLoader";
 
 export default function App() {
@@ -35,6 +36,7 @@ export default function App() {
                 <Route path="loans/:id/edit" element={<EditLoanPage />} />
                 <Route path="holidays" element={<HolidaysPage />} />
                 <Route path="notifications" element={<NotificationsPage />} />
+                <Route path="profile" element={<ProfilePage />} />
               </Route>
             </Route>
           </Route>
