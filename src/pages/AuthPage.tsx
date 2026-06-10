@@ -4,6 +4,7 @@ import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { ThemeToggle } from "../components/ThemeToggle";
 import { AppLogo } from "../components/AppLogo";
+import { ForgotPasswordFlow } from "../components/ForgotPasswordFlow";
 
 type Mode = "login" | "signup" | "forgot";
 
@@ -101,44 +102,49 @@ export function AuthPage() {
             {/* Inner glow line at top */}
             <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-brand-500/50 to-transparent" />
             
-            <div className="flex border-b border-white/5">
-              <button
-                type="button"
-                onClick={() => switchMode("login")}
-                className={`flex-1 py-4 text-sm font-medium transition-all duration-300 ${
-                  mode === "login"
-                    ? "text-brand-400 border-b-2 border-brand-500 bg-brand-500/10"
-                    : "text-slate-500 hover:text-slate-300 hover:bg-white/5"
-                }`}
-              >
-                Log in
-              </button>
-              <button
-                type="button"
-                onClick={() => switchMode("signup")}
-                className={`flex-1 py-4 text-sm font-medium transition-all duration-300 ${
-                  mode === "signup"
-                    ? "text-brand-400 border-b-2 border-brand-500 bg-brand-500/10"
-                    : "text-slate-500 hover:text-slate-300 hover:bg-white/5"
-                }`}
-              >
-                Sign up
-              </button>
-            </div>
-
-            <form onSubmit={handleSubmit} className="p-8 space-y-5">
-              <div className="mb-2">
-                <h2 className="text-2xl font-bold text-white">
-                  {mode === "login" ? "Welcome back" : mode === "signup" ? "Create account" : "Reset Password"}
-                </h2>
-                <p className="text-sm text-slate-400 mt-1.5">
-                  {mode === "login"
-                    ? "Enter your email and password"
-                    : mode === "signup"
-                    ? "Sign up to start tracking your loans"
-                    : "Enter your email to receive a password reset link"}
-                </p>
+            {mode !== "forgot" && (
+              <div className="flex border-b border-white/5">
+                <button
+                  type="button"
+                  onClick={() => switchMode("login")}
+                  className={`flex-1 py-4 text-sm font-medium transition-all duration-300 ${
+                    mode === "login"
+                      ? "text-brand-400 border-b-2 border-brand-500 bg-brand-500/10"
+                      : "text-slate-500 hover:text-slate-300 hover:bg-white/5"
+                  }`}
+                >
+                  Log in
+                </button>
+                <button
+                  type="button"
+                  onClick={() => switchMode("signup")}
+                  className={`flex-1 py-4 text-sm font-medium transition-all duration-300 ${
+                    mode === "signup"
+                      ? "text-brand-400 border-b-2 border-brand-500 bg-brand-500/10"
+                      : "text-slate-500 hover:text-slate-300 hover:bg-white/5"
+                  }`}
+                >
+                  Sign up
+                </button>
               </div>
+            )}
+
+            {mode === "forgot" ? (
+              <div className="p-8">
+                <ForgotPasswordFlow onBackToLogin={() => switchMode("login")} />
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="p-8 space-y-5">
+                <div className="mb-2">
+                  <h2 className="text-2xl font-bold text-white">
+                    {mode === "login" ? "Welcome back" : "Create account"}
+                  </h2>
+                  <p className="text-sm text-slate-400 mt-1.5">
+                    {mode === "login"
+                      ? "Enter your email and password"
+                      : "Sign up to start tracking your loans"}
+                  </p>
+                </div>
 
               {error && (
                 <div className="text-sm text-red-400 bg-red-950/50 border border-red-900/50 rounded-xl px-4 py-3 backdrop-blur-md">
@@ -188,7 +194,6 @@ export function AuthPage() {
                 </div>
               </div>
 
-              {mode !== "forgot" && (
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
                     <label className="block text-sm font-medium text-slate-300">Password</label>
@@ -224,7 +229,6 @@ export function AuthPage() {
                     </button>
                   </div>
                 </div>
-              )}
 
               {mode === "signup" && (
                 <div>
@@ -256,21 +260,10 @@ export function AuthPage() {
                   ? "Please wait…"
                   : mode === "login"
                     ? "Log in"
-                    : mode === "signup"
-                    ? "Create account"
-                    : "Send reset link"}
+                    : "Create account"}
               </button>
-              
-              {mode === "forgot" && (
-                <button
-                  type="button"
-                  onClick={() => switchMode("login")}
-                  className="w-full py-3 rounded-xl border border-white/10 bg-white/5 text-slate-300 font-medium text-sm hover:bg-white/10 transition-colors"
-                >
-                  Back to login
-                </button>
-              )}
             </form>
+            )}
           </div>
 
           <p className="text-center text-sm text-slate-500 mt-8 font-medium">
