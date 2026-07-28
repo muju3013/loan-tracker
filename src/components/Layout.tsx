@@ -7,10 +7,12 @@ import {
   Bell,
   LogOut,
   Sun,
-  Moon
+  Moon,
+  Download
 } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { useNotifications } from "../hooks/useNotifications";
+import { usePWAInstall } from "../hooks/usePWAInstall";
 import { AppLogo } from "./AppLogo";
 import { useState } from "react";
 
@@ -20,6 +22,7 @@ export function Layout() {
   const { unreadCount } = useNotifications();
   const location = useLocation();
   const [showFabMenu, setShowFabMenu] = useState(false);
+  const { isInstallable, install } = usePWAInstall();
 
   async function handleLogout() {
     await logout();
@@ -83,6 +86,12 @@ export function Layout() {
               <span>Export PDF Report</span>
               <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400"><LayoutDashboard className="w-4 h-4" /></div>
             </button>
+            {isInstallable && (
+              <button onClick={() => { setShowFabMenu(false); install(); }} className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full text-sm font-medium hover:bg-white/20 transition-colors text-brand-300">
+                <span>Install App</span>
+                <div className="w-8 h-8 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-400"><Download className="w-4 h-4" /></div>
+              </button>
+            )}
           </div>
         )}
         <button
